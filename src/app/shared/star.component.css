@@ -4,3 +4,9 @@
 div {
     cursor: pointer;
 }
+.starColorGreen{
+    color: rgb(110, 183, 51)
+}
+.starColorRed{
+    color: rgb(233, 58, 14)
+}

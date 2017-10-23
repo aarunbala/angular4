@@ -1,11 +1,21 @@
 <div class="crop" 
     [style.width.px]="starWidth"
-    [title]="rating">
+    [title]="rating"
+    (click)="onClick()">
     <div style="width: 86px">
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
+        <div *ngIf='rating >= 3'>
+            <span class='glyphicon glyphicon-star starColorGreen'> </span>
+            <span class='glyphicon glyphicon-star starColorGreen'> </span>
+            <span class='glyphicon glyphicon-star starColorGreen'> </span>
+            <span class='glyphicon glyphicon-star starColorGreen'> </span>
+            <span class='glyphicon glyphicon-star starColorGreen'> </span>
+        </div>
+        <div *ngIf='rating < 3'>
+            <span class='glyphicon glyphicon-star starColorRed'> </span>
+            <span class='glyphicon glyphicon-star starColorRed'> </span>
+            <span class='glyphicon glyphicon-star starColorRed'> </span>
+            <span class='glyphicon glyphicon-star starColorRed'> </span>
+            <span class='glyphicon glyphicon-star starColorRed'> </span>
+        </div>
     </div>
 </div>
