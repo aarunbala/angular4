@@ -3,7 +3,7 @@ import { ProductService } from './product/product.service';
 
 @Component({
   selector: 'pm-root',
-  templateUrl: 'app.component.html',
+  templateUrl: './app.component.html',
   providers: [ProductService]
 })
 
