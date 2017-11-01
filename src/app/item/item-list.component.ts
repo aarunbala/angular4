@@ -13,7 +13,7 @@ export class ItemListComponent implements OnInit {
   filteredItemList: IItem[];
   _listFilter: string;
   totalPrice: number;
-  _priceFilter: number = -1;
+  _priceFilter: number;
 
   constructor(private _itemService: ItemListService) { }
 
@@ -23,34 +23,53 @@ export class ItemListComponent implements OnInit {
 
   set listFilter(value: string) {
     this._listFilter = value;
-    this.filteredItemList = this.listFilter ? this.performFilter(value) : this.itemList;
+    this.filteredItemList = this.listFilter ? this.performFilter(this.listFilter, this.priceFilter) : this.itemList;
     this.calculateTotal(this.filteredItemList);
   }
 
-  get priceFilter(): string {
-    return this._priceFilter + ' ';
+  get priceFilter(): number {
+    return this._priceFilter;
   }
 
-  set priceFilter(value: string) {
-    this._priceFilter = Number.parseInt(value);
+  set priceFilter(value: number) {
+    this._priceFilter = value; // Number.parseInt(value);
     console.log(this._priceFilter);
-    this.filteredItemList = this._priceFilter ? this.performPriceFilter(this._priceFilter) : this.itemList;
+    this.filteredItemList = this._priceFilter ? this.performFilter(this.listFilter, this.priceFilter) : this.itemList;
     this.calculateTotal(this.filteredItemList);
   }
 
-  performPriceFilter(value: number): IItem[] {
-    console.log('Price Filter' + value);
-    return this.itemList.filter( (item: IItem) => ( item.price >= value));
+  performFilter(listFilter: string, price: number): IItem[] {
+    console.log('Price Filter' + price);
+    // tslint:disable-next-line:prefer-const
+    let items: IItem[];
+    if (listFilter && price) {
+      listFilter = listFilter.toLocaleLowerCase();
+      console.log('Inside both');
+      return this.itemList.filter( (item: IItem) => (
+        item.product.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.description.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.category.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.shop.toLocaleLowerCase().indexOf(listFilter) !== -1
+      ) &&  ( item.price <= price));
+    } else {
+    if (listFilter) {
+      console.log('Inside List');
+      listFilter = listFilter.toLocaleLowerCase();
+      return this.itemList.filter( (item: IItem) => (
+        item.product.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.description.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.category.toLocaleLowerCase().indexOf(listFilter) !== -1 ||
+        item.shop.toLocaleLowerCase().indexOf(listFilter) !== -1
+      ));
+    }
+    if (price) {
+      console.log('Inside Price');
+      return this.itemList.filter( (item: IItem) => ( item.price <= price));
+    }
+  }
+    return this.itemList;
   }
 
-  performFilter(value: string): IItem[] {
-    value = value.toLocaleLowerCase();
-    return this.itemList.filter( (item: IItem) => (
-      item.product.toLocaleLowerCase().indexOf(value) !== -1 ||
-      item.description.toLocaleLowerCase().indexOf(value) !== -1 ||
-      item.category.toLocaleLowerCase().indexOf(value) !== -1
-    ));
-  }
   remove(item: IItem) {
     this.itemList = this.itemList.filter(items => items.id !== item.id);
     this.filteredItemList = this.itemList;
