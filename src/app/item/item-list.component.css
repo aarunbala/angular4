@@ -1,15 +1,33 @@
-.glyphicon-edit {
-    color: orange;
-    font-size:24px;
+thead {
+    color: #337AB7
 }
-.glyphicon-edit:hover{
-    color:#c7ff44;
+
+.glyphicon-edit {
+  color: orange;
+  font-size: 24px;
+}
+
+.glyphicon-edit:hover {
+  color: #17eb04;
 }
 
 .glyphicon-remove {
-    color: grey;
-    font-size:24px;
+  color: grey;
+  font-size: 24px;
 }
+
 .glyphicon-remove:hover {
-    color: red;
+  color: red;
+}
+
+input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: searchfield;
+  font-size: 12px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
 }

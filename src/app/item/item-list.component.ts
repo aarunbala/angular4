@@ -13,6 +13,7 @@ export class ItemListComponent implements OnInit {
   filteredItemList: IItem[];
   _listFilter: string;
   totalPrice: number;
+  _priceFilter: number = -1;
 
   constructor(private _itemService: ItemListService) { }
 
@@ -24,6 +25,22 @@ export class ItemListComponent implements OnInit {
     this._listFilter = value;
     this.filteredItemList = this.listFilter ? this.performFilter(value) : this.itemList;
     this.calculateTotal(this.filteredItemList);
+  }
+
+  get priceFilter(): string {
+    return this._priceFilter + ' ';
+  }
+
+  set priceFilter(value: string) {
+    this._priceFilter = Number.parseInt(value);
+    console.log(this._priceFilter);
+    this.filteredItemList = this._priceFilter ? this.performPriceFilter(this._priceFilter) : this.itemList;
+    this.calculateTotal(this.filteredItemList);
+  }
+
+  performPriceFilter(value: number): IItem[] {
+    console.log('Price Filter' + value);
+    return this.itemList.filter( (item: IItem) => ( item.price >= value));
   }
 
   performFilter(value: string): IItem[] {
@@ -40,14 +57,9 @@ export class ItemListComponent implements OnInit {
     this.calculateTotal(this.filteredItemList);
   }
 
-  private callFn(item: IItem) {
-    console.log('Item Clicked : ' + JSON.stringify(item));
-  }
-
   calculateTotal(list: IItem[]) {
     let tp = 0;
-    list.forEach(item => {tp = tp + item.price;
-      console.log(tp); });
+    list.forEach(item => {tp = tp + item.price;});
     this.totalPrice = tp;
   }
   ngOnInit() {
