@@ -1,0 +1,12 @@
+<tr>
+  <td>*</td>
+  <td><input type="date" #date placeholder="DD / MM / YYYY"/></td>
+  <td><input type="text" #category placeholder="Category"/></td>
+  <td><input type="text" #product placeholder="Product"/></td>
+  <td><input type="text" #description placeholder="Description"/></td>
+  <td><input type="text" #quantity placeholder="Quantity"  />
+      <input type="text" #units placeholder="Units" /></td>
+  <td><input type="text" #price placeholder="Price"/></td>
+  <td><input type="text" #shop placeholder="Shop"/></td>
+  <td><img src="./assets/images/plus.png" alt="Delete" height="26" width="26" (click)="addProfile(firstName, lastName,dob,age, height,weight,activity);" #addImage (mouseover)="changeImage(addImage,'./assets/images/plusSel.png')" (mouseout)="changeImage(addImage,'./assets/images/plus.png')"></td>
+</tr>

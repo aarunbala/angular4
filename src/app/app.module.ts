@@ -11,15 +11,18 @@ import { ProductDetailsComponent } from './product/product-details.component';
 import { RouterModule } from '@angular/router';
 import { WelcomeComponent } from './home/welcome.component';
 import { ProductGuardService } from './product/product-guard.service';
+import { ItemListComponent } from './item/item-list.component';
+import { ItemAddComponent } from './item/item-add.component';
 
 @NgModule({
   declarations: [
-    AppComponent, ProductListComponent, ConvertToSpacesPipe, StarComponent, ProductDetailsComponent, WelcomeComponent
+    AppComponent, ProductListComponent, ConvertToSpacesPipe, StarComponent, ProductDetailsComponent, WelcomeComponent, ItemListComponent, ItemAddComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot([
       // tslint:disable-next-line:no-unused-expression
       { path: 'products', component: ProductListComponent },
+      { path: 'items', component: ItemListComponent },
       { path: 'products/:id',
         canActivate: [ProductGuardService],
         component: ProductDetailsComponent },

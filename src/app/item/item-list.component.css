@@ -1,0 +1,15 @@
+.glyphicon-edit {
+    color: orange;
+    font-size:24px;
+}
+.glyphicon-edit:hover{
+    color:#c7ff44;
+}
+
+.glyphicon-remove {
+    color: grey;
+    font-size:24px;
+}
+.glyphicon-remove:hover {
+    color: red;
+}
